@@ -1,6 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "TankAiController.h"
+
+void ATankAiController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	
+}
 
 void ATankAiController::BeginPlay()
 {
