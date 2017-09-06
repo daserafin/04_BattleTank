@@ -3,6 +3,11 @@
 #include "TankAimingComponent.h"
 
 
+void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
+{
+	Barrel = BarrelToSet;
+}
+
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
@@ -32,18 +37,20 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	// ...
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation)
+void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	auto OurTankName = GetName();
-	auto BarrelLocation = Barrel->GetComponentLocation();
-	UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s from %s"), 
-		*OurTankName, 
-		*HitLocation.ToString(), 
-		*BarrelLocation.ToString()
-	);
+	if (!Barrel)
+	{
+		return;
+	}
+	FVector OutLaunchVelocity;
+	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+
+	// Calculate the OutLaunchVelocity
+	auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+
+	
+	UE_LOG(LogTemp, Warning, TEXT("Aiming at %f"), *AimDirection.ToString());
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
-{
-	Barrel = BarrelToSet;
-}
+
