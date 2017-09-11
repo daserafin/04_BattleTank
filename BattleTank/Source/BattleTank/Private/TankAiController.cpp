@@ -1,4 +1,7 @@
 #include "TankAiController.h"
+#include "Engine/World.h"
+#include "Tank.h"
+#include "CoreMinimal.h"
 
 void ATankAiController::Tick(float DeltaTime)
 {
