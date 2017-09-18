@@ -3,47 +3,25 @@
 #include "Tank.h"
 #include "CoreMinimal.h"
 
-void ATankAiController::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-	if (GetPlayerTank())
-	{
-		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
-	}
-}
-
 void ATankAiController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto ControlledTank = GetControlledTank();
-	auto PlayerTank = GetPlayerTank();
-	if (!PlayerTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("No player tanks around here"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("AIController is looking at: %s"), *(PlayerTank->GetName()));
-	}
 }
 
-
-ATank* ATankAiController::GetControlledTank() const
+void ATankAiController::Tick(float DeltaTime)
 {
-	return Cast<ATank>(GetPawn());
-}
+	Super::Tick(DeltaTime);
 
-ATank* ATankAiController::GetPlayerTank() const
-{
-	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-	if (!PlayerPawn)
+	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto ControlledTank = Cast<ATank>(GetPawn());
+	
+	if (PlayerTank)
 	{
-		return nullptr;
-	}
-	else
-	{
-		return Cast<ATank>(PlayerPawn);
+		// TODO move towards the player
+
+		// Aim towards the player
+		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+
+		ControlledTank->Fire(); // TODO limit fire rate
 	}
 }
-
-

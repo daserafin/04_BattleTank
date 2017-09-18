@@ -38,13 +38,18 @@ private:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
-	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000; // Sensible starting value of 100 m/s
-	
-	UPROPERTY(EditAnywhere, Category = Setup)
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
+	
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float LaunchSpeed = 100000; // Sensible starting value of 100 m/s
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
 
 	// Local barrel reference for spawning projectile
 	UTankBarrel* Barrel = nullptr;
+
+	double LastFireTime = 0;
 };
