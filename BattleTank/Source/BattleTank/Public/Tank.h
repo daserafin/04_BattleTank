@@ -5,8 +5,9 @@
 
 // Forward declarations
 class UTankBarrel;
+class UTankAimingComponent;
+class UTankMovementComponent;
 class AProjectile;
-class UTankAimingComponent; 
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -27,7 +28,10 @@ public:
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
-	
+
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
+
 private:	
 
 	// Sets default values for this pawn's properties
