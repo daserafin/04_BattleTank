@@ -1,3 +1,0 @@
-C:\Users\Dimas\Documents\04_BattleTank\BattleTank\Source\BattleTank\BattleTank.Build.cs
-C:\Users\Dimas\Documents\04_BattleTank\BattleTank\Source\BattleTank.Target.cs
-C:\Users\Dimas\Documents\04_BattleTank\BattleTank\Source\BattleTankEditor.Target.cs
