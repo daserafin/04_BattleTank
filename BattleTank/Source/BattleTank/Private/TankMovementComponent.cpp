@@ -1,19 +1,23 @@
 #include "TankMovementComponent.h"
 #include "TankTrack.h"
 
+void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
+{
+	LeftTrack = LeftTrackToSet;
+	RightTrack = RightTrackToSet;
+	// TODO prevent double speed due to dual control use
+}
+
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
-	//auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("Intend move forward throw: %f"), Throw);
+	if (!LeftTrack || !RightTrack) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 }
 
-void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
+void UTankMovementComponent::IntendTurnRight(float Throw)
 {
-	if (!LeftTrackToSet || !RightTrackToSet) { return; }
-
-	LeftTrack = LeftTrackToSet;
-	RightTrack = RightTrackToSet;
-	// TODO prevent double speed due to dual control use
+	if (!LeftTrack || !RightTrack) { return; }
+	LeftTrack->SetThrottle(Throw);
+	RightTrack->SetThrottle(-Throw);
 }
