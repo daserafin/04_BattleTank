@@ -20,14 +20,16 @@ public:
 
 	void BeginPlay() override;
 
+protected:
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	ATank* GetControlledTank() const;
+
 private:
 	bool GetSightRayHitLocation(FVector & OutHitLocation) const;
 
 	bool GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const;
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector &OutHitLocation) const;
-
-	ATank* GetControlledTank() const;
 
 	void AimTowardsCrosshair();
 
