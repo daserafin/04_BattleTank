@@ -3,6 +3,8 @@
 #include "Tank.h"
 #include "CoreMinimal.h"
 
+// Depends on movement component via pathfinding system
+
 void ATankAiController::BeginPlay()
 {
 	Super::BeginPlay();
