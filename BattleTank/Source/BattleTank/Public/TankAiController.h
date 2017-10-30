@@ -3,8 +3,6 @@
 #include "AIController.h"
 #include "TankAiController.generated.h"
 
-class ATank; // Forward declaration
-
 /**
  * 
  */
