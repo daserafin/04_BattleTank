@@ -34,12 +34,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
 
+	void BeginPlay() override;
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = State)
-	EFiringState FiringState = EFiringState::Locked;
+	EFiringState FiringState = EFiringState::Reloading;
 	
 private:
 	void MoveBarrelTowards(FVector AimDirection);
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
