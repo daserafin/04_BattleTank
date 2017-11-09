@@ -33,6 +33,11 @@ private:
 
 	void AimTowardsCrosshair();
 
+	void SetPawn(APawn* InPawn);
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
+
 	UPROPERTY(EditDefaultsOnly)
 	float CrosshairLocationX = 0.5f;
 

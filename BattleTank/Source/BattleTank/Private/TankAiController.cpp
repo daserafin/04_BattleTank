@@ -2,12 +2,31 @@
 #include "Engine/World.h"
 #include "CoreMinimal.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
 
 // Depends on movement component via pathfinding system
+
+void ATankAiController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAiController::OnPossessedTankDeath);
+	}
+}
 
 void ATankAiController::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void ATankAiController::OnPossessedTankDeath()
+{
+	if (!GetPawn()) { return; }
+	GetPawn()->DetachFromControllerPendingDestroy();
 }
 
 void ATankAiController::Tick(float DeltaTime)
